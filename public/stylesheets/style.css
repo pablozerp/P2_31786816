@@ -5,20 +5,12 @@
   font-family: 'Poppins', sans-serif;
 }    
 
-body
-{
-  background: lightblue;
-  min-height: 100vh;
-}
 
 .container {
   position: relative;
-  min-width: 400px;
-  max-width: 1000px;
   background: #fff;
   display: flex;
   flex-direction: row;
-  margin: 50px auto;
   z-index: 100;
 }
 
@@ -102,13 +94,6 @@ body
   background: #081921;
   display: block;
   margin-top: 5px;
-}
-.percent1 div{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #f5a803;
 }
 
 .enlace {
@@ -385,11 +370,9 @@ body{
 }
 
 form {
-  padding: 50px 55px;
-  box-shadow: 0 0 20px rgb(0, 0, 0, 0.2);
   border-radius: 20px;
   text-align: center;
-  width: 340px;
+  width: 540px;
 }
 
 .input-group{
@@ -398,10 +381,7 @@ form {
   text-align: left;
 }
 
-h2{
-  color: #283629;
-  font-size: 35px;
-}
+
 
 label{
   color: #283629;
@@ -430,13 +410,13 @@ label{
   color: #ffffff;
   border: 0;
   border-radius: 25px;
-  background-color: #51d94c;
-  box-shadow: 0 0 20px rgb(25, 254, 0, 0.4);
+  background-color: #f5a803;
+  
   cursor: pointer;
 }
 
 .btn:hover{
-  background: #50e04b;
+  background: #76b28e;
 }
 
 @media (max-width:991px) {
