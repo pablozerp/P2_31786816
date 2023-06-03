@@ -9,12 +9,13 @@ require('dotenv').config()
 var request = require('request');
 
 const visitor = ua(process.env.UA);
-
+const myToken = process.env.MY_TOKEN
+const viss = process.env.VISS
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   
-  res.render('index', { title: 'Pablo Zerpa,31 786 816, seccion 3' });
+  res.render('index', { title: 'Pablo Zerpa,31 786 816, seccion 3',myToken:myToken,viss:viss });
 });
 visitor.pageview('/page1').send();
 visitor.event('Category', 'Action', 'Label', 42).send();
