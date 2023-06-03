@@ -15,6 +15,7 @@
     "morgan": "~1.9.1",
     "nodemailer": "^6.9.2",
     "request": "^2.88.2",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "universal-analytics": "^0.5.3"
   }
 }

@@ -4,15 +4,20 @@ var router = express.Router();
 
 const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
+const ua = require('universal-analytics');
 require('dotenv').config()
+var request = require('request');
 
+const visitor = ua(process.env.UA);
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  
   res.render('index', { title: 'Pablo Zerpa,31 786 816, seccion 3' });
 });
-
+visitor.pageview('/page1').send();
+visitor.event('Category', 'Action', 'Label', 42).send();
 
 router.post('/', async function(req, res, next) {
   let  name = req.body.name;
