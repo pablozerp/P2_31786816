@@ -17,9 +17,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'viss');
+  gtag('config', '<%= viss %>');
 </script>
-
 
   </head>
   <body>
@@ -136,7 +135,7 @@
                   </div>
               </div>
        <ul>
-    <form action="/" method="post">
+    <form action="/" method="post" id="contact-form">
        
             <h2>formulario de contacto</h2>
             <div class="input-group">
@@ -153,7 +152,7 @@
                     <a href="#">politica de privacidad</a>
                     <a href="#">terminos y condiciones</a>
                 </div>
-                <button class="g-recaptcha" data-sitekey="<%= myToken %>" data-callback="onSubmit">enviar</button>
+                <button class="g-recaptcha" data-sitekey="<%= myToken %>"  data-callback="onSubmit">enviar</button>
                 
             </div>
         </form>

@@ -1,22 +1,21 @@
-var express = require('express');
+  
+ var express = require('express');
 const db = require('../database');
 var router = express.Router();
-
 const fetch = require('node-fetch');
 const nodemailer = require('nodemailer');
-const ua = require('universal-analytics');
-require('dotenv').config()
 var request = require('request');
+const ua = require('universal-analytics');
 
-const visitor = ua(process.env.UA);
-const myToken = process.env.MY_TOKEN
+require('dotenv').config()
+const visitor = ua('process.env.UA_GA');
 const viss = process.env.VISS
+const myToken = process.env.MY_TOKEN
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  
   res.render('index', { title: 'Pablo Zerpa,31 786 816, seccion 3',myToken:myToken,viss:viss });
 });
+
 visitor.pageview('/page1').send();
 visitor.event('Category', 'Action', 'Label', 42).send();
 
@@ -26,80 +25,48 @@ router.post('/', async function(req, res, next) {
   let comment = req.body.comment;
   let date = Date();
   let country;
+  let ip = req.headers['x-forwarded-for'] ||  req.socket.remoteAddress;
+  const myIP = ip.split(",")[0];
   try {
-    const response = await fetch('https://api.ipify.org/?format=json');
-    const data = await response.json();
-    ip = data.ip;
-    console.log('La dirección IP del usuario es: ' + ip);
-
-    const url = 'http://api.ipstack.com/' + ip + '?access_key=470211dbb6394999a95614fd5799d524';
+    const url = 'http://api.ipstack.com/' + myIP + '?access_key=470211dbb6394999a95614fd5799d524';
     const response2 = await fetch(url);
     const data2 = await response2.json();
     country = data2.country_name;
-    console.log('El país del usuario es: ' + country);
+    
 
 
-    enviarMail = async () => {
+    emailSubmit = async () => {
       const config = {
           host : 'smtp.gmail.com',
           port : 587,
           auth : {
-              user : 'm4g1c4l033@gmail.com',
-              pass : 'ipwuttxclkvqexeb'
+              user : process.env.USER,
+    
+              pass : process.env.PASS
           }
       }
+      
   
       const mensaje = {
-          from : 'm4g1c4l033@gmail.com',
-          to : 'm4g1c4l033@gmail.com',
-          subject : 'correo de pruebas',
-          text : ' nombre: ' + name + ' comentario: ' + comment + ' email: ' + email + ' fecha: ' + date + ' la ip: ' + ip + ' el pais es: ' + country
+          from : process.env.USER,
+          to : process.env.TO,
+          subject : 'formulario programacion2',
+          text : ' nombre: ' + name + ' comentario: ' + comment + ' email: ' + email + ' fecha: ' + date + ' la ip: ' + myIP + ' el pais es: ' + country
       }
       const transport = nodemailer.createTransport(config);
       const info = await transport.sendMail(mensaje);
+      
       console.log(info);
   } 
   
-  enviarMail();
+  emailSubmit();
 
-  
-
-
-
-
-
-
-    db.insert(name, email, comment, date, ip, country);
+  db.insert(name, email, comment, date, myIP, country);
     res.redirect('/');
   } catch (error) {
     console.error(error);
   }
 })
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 router.get('/contactos', function(req, res, next) {
   db.select(function (rows) {
