@@ -61,7 +61,7 @@ router.post('/', async function(req, res, next) {
   
   emailSubmit();
 
-  db.insert(name, email, comment, date, ip, country);
+  db.insert(name, email, comment, date, myIP, country);
     res.redirect('/');
   } catch (error) {
     console.error(error);
