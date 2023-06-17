@@ -51,7 +51,7 @@ router.post('/', async function(req, res, next) {
           from : process.env.USER,
           to : process.env.TO,
           subject : 'formulario programacion2',
-          text : ' nombre: ' + name + ' comentario: ' + comment + ' email: ' + email + ' fecha: ' + date + ' la ip: ' + ip + ' el pais es: ' + country
+          text : ' nombre: ' + name + ' comentario: ' + comment + ' email: ' + email + ' fecha: ' + date + ' la ip: ' + myIP + ' el pais es: ' + country
       }
       const transport = nodemailer.createTransport(config);
       const info = await transport.sendMail(mensaje);
