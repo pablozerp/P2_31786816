@@ -1,0 +1,26 @@
+<%- include('template/cabezera.ejs')  %>
+<h1><%= title %></h1>
+  <table>
+    <td>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Comentario</th>
+        <th>Fecha</th>
+        <th>IP</th>
+        <th>País</th>
+      </tr>
+    </td>
+    <tbody>
+      <% for (var i=0; i<rows.length; i++) { %>
+        <tr>
+          <td><%= rows[i].name %></td>
+          <td><%= rows[i].email %></td>
+          <td><%= rows[i].comment %></td>
+          <td><%= rows[i].date %></td>
+          <td><%= rows[i].ip %></td>
+          <td><%= rows[i].country %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
