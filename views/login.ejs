@@ -1,7 +1,6 @@
 <%- include('template/cabezera.ejs')  %>
 <body>
   <form action="/login" method="post">
-    <section class="form-register">
       <h4>registrese para segir</h4>
       <br>
       <label for="email">email</label>
@@ -11,7 +10,26 @@
     <input class="submit" type="submit" value="enviar">
     
 
-  </section>
+  
   </form>
+
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <div id="g_id_onload"
+     data-client_id='278314386638-3eqjfusf33n4laupd1i3602nvoqgqrer.apps.googleusercontent.com'
+     data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="onSignIn"
+                    data-login_uri="/logueo"
+                    data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+     data-type="standard"
+     data-size="large"
+     data-theme="outline"
+     data-text="sign_in_with"
+     data-shape="rectangular"
+     data-logo_alignment="left">
+  </div>
 </body>
 </html>

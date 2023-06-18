@@ -203,4 +203,116 @@ router.post("/login",passport.authenticate('local',{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const ic = process.env.ID_CLIENT2
+const {OAuth2Client} = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID);
+async function getEmail(datos) {
+  // Verificar el token JWT y obtener la información del usuario
+  const ticket = await client.verifyIdToken({
+    idToken: datos.credential,
+    audience: process.env.CLIENT_ID
+  });
+  // Obtener un objeto con la información del usuario
+  const user = ticket.getPayload();
+  // Obtener el email del usuario
+  const email = user.email;
+  // Devolver el email
+  return email;
+}
+router.post('/logueo', function(req, res, next){
+  const datos = req.body;
+  // Llamar a la función getEmail() para obtener el email del usuario
+  getEmail(datos).then(email => {
+    if (email == process.env.EMAIL_GOOGLE) {
+      db.select(function (rows) {
+        res.render('contactos', { title: 'Registros del formulario',rows: rows,myToken:myToken,viss:viss });
+      });
+    } else {
+      res.status(500).send("Error al verificar el token, No eres un usuario autorizado");
+    }
+    
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
