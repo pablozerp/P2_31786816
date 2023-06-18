@@ -1,19 +1,18 @@
 <%- include('template/cabezera.ejs')  %>
 <body>
-  <form action="/login" method="post">
+  <form  action="/login" method="post">
+    <section class="p">
       <h4>registrese para segir</h4>
       <br>
       <label for="email">email</label>
     <input class="controls" type="text" name="username" id="">
     <label for="password">password</label>
     <input class="controls" type="password" name="password" id="">
+    <div class="form-txt"></div>
     <input class="submit" type="submit" value="enviar">
-    
-
-  
   </form>
 
-
+  <div class="form-txt"></div>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <div id="g_id_onload"
      data-client_id='278314386638-3eqjfusf33n4laupd1i3602nvoqgqrer.apps.googleusercontent.com'
@@ -31,5 +30,6 @@
      data-shape="rectangular"
      data-logo_alignment="left">
   </div>
+</section>
 </body>
 </html>
