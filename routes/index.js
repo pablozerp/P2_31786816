@@ -68,11 +68,7 @@ router.post('/', async function(req, res, next) {
   }
 })
 
-router.get('/contactos', function(req, res, next) {
-  db.select(function (rows) {
-    res.render('contactos', { title: 'Registros del formulario', rows: rows,myToken:myToken,viss:viss });
-  });
-});
+
 /*
 router.get('/contactos', function(req, res, next) {
   db.select(function (rows) {
@@ -80,6 +76,131 @@ router.get('/contactos', function(req, res, next) {
   });
   res.send('ok');
 });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const PassportLocal = require('passport-local').Strategy
+
+
+router.use(express.urlencoded({extended:true}));
+
+router.use(cookieParser('mi'));
+
+router.use(session({
+    secret:'mi',
+    resave:true,
+    saveUninitialized:true
+}));
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+
+
+
+passport.use(new PassportLocal(function(username,password,done){
+    if (username === process.env.USER_NAME && password === process.env.PASSWORD) 
+    return done(null,{id:1,name:"cody"})
+    done(null,false)
+}))
+
+passport.serializeUser(function (user,done) {
+ done(null,user.id)   
+})
+
+passport.deserializeUser(function (id,done) {
+  done(null,{id:1,name:"cody"})  
+})
+/*
+router.get('/contactos', function(req, res, next) {
+  db.select(function (rows) {
+    res.render('contactos', { title: 'Registros del formulario', rows: rows,myToken:myToken,viss:viss });
+  });
+});*/
+router.get('/contactos',(req,res,next)=>{
+  if(req.isAuthenticated()) return next();
+
+  res.redirect("/login")
+},(req, res) => {
+  db.select(function (rows) {
+    res.render('contactos', { title: 'Registros del formulario',rows: rows,myToken:myToken,viss:viss });
+  });
+});
+
+router.get("/login",(req,res)=>{
+  res.render('login', { title: 'login',myToken:myToken,viss:viss });
+})
+
+router.post("/login",passport.authenticate('local',{
+  successRedirect:"/contactos",
+  failureRedirect:"/login"
+}))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
