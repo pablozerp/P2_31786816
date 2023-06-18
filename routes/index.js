@@ -146,7 +146,7 @@ router.use(passport.session());
 
 
 passport.use(new PassportLocal(function(username,password,done){
-    if (username === process.env.USER_NAME && password === process.env.PASSWORD) 
+    if (username === process.env.NOMBRE && password === process.env.CONTRASEÑA) 
     return done(null,{id:1,name:"cody"})
     done(null,false)
 }))
